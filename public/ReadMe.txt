@@ -1,5 +1,5 @@
 Course: COSC 225: Web Programming
-Student: Asma Bachir Bey
+Student: Asma 
 Date: 2025/05/20
 Final Project:  To-Do List for productivity
 
