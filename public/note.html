@@ -1,0 +1,187 @@
+<!--Course: COSC 225: Web Programming
+Student: Asma Bachir Bey
+Date: 2025/05/20
+file:  html file -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Metadata and External Resource Inclusions -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My To-Do List</title>
+    <link rel="stylesheet" href="notes.css" />
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!--icones from fontawesome.com-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <!-- Chart.js for the chart: pie -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FullCalendar for Task Calendar -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-container">
+      <div class="toggle-btn" onclick="toggleSidebar()">
+        <span class="circle"></span>
+      </div>
+      <div class="sidebar">
+        <div class="logo">TASKS</div>
+        <nav>
+          <ul>
+            <!-- Navigation Items -->
+            <li class="active" onclick="switchTab('current')">
+              <span>Today's Tasks</span>
+            </li>
+            <li onclick="switchTab('upcoming')">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Upcoming</span>
+            </li>
+            <li onclick="switchTab('completed')">
+              <i class="fas fa-check-double"></i>
+              <span>Completed</span>
+            </li>
+            <li onclick="switchTab('analytics')">
+              <i class="fas fa-chart-bar"></i>
+              <span>Analytics</span>
+            </li>
+            <li onclick="switchTab('calendar')">
+              <i class="fas fa-calendar-day"></i>
+              <span>Calendar</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <h1>Welcome</h1>
+
+      <!-- User Reflection Section -->
+      <div class="reflection-section">
+        <form id="feelingForm">
+          <h1>How are you feeling today?</h1>
+          <input type="radio" id="Amazing" name="emotion" value="Amazing" />
+          <label for="Amazing">Amazing</label>
+          <input type="radio" id="Fine" name="emotion" value="Fine" />
+          <label for="Fine">Fine</label>
+          <input type="radio" id="Sad" name="emotion" value="Sad" />
+          <label for="Sad">Sad</label>
+          <br /><br />
+          <button type="submit">Submit Feeling</button>
+        </form>
+      </div>
+
+      <!-- Content Sections for Different Tabs -->
+      <!-- Current Tasks Section -->
+      <div id="currentSection" class="container tab-section">
+        <h1>To-Do List 🌸</h1>
+
+        <!-- Theme Selector -->
+        <div class="theme-selector">
+          <label for="theme">Choose a Theme:</label>
+          <select id="theme">
+            <option value="default">Default</option>
+            <option value="floral">Floral</option>
+            <option value="space">Space</option>
+            <option value="Pink">Pink</option>
+          </select>
+        </div>
+
+        <!-- Task Input -->
+        <div class="task-input">
+          <input type="text" id="taskInput" placeholder="Add a new task..." />
+          <input type="date" id="taskStartDate" placeholder="Start Date..." />
+          <button id="addTaskBtn">Add Task</button>
+        </div>
+
+        <!-- Task List for Today's Tasks -->
+        <h2>Today's Tasks</h2>
+        <ul id="currentTaskList"></ul>
+
+        <!-- Daily Quote Section -->
+        <div class="quote-section">
+          <h1>Quote of the Day 🌸</h1>
+          <p id="quote">Loading quote...</p>
+        </div>
+      </div>
+
+      <!-- Upcoming Tasks Section -->
+      <div id="upcomingSection" class="tab-section" style="display: none">
+        <h2>Upcoming Tasks</h2>
+        <ul id="upcomingTaskList"></ul>
+      </div>
+
+      <!-- Completed Tasks Section -->
+      <div id="completedSection" class="tab-section" style="display: none">
+        <h2>Completed Tasks</h2>
+        <ul id="completedList"></ul>
+      </div>
+
+      <!-- Analytics Section -->
+      <div id="analyticsSection" class="tab-section" style="display: none">
+        <h2>Task Analytics</h2>
+        <!-- Chart Containers -->
+        <div class="chart-container">
+          <canvas id="taskStatusChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Calendar Section -->
+      <div id="calendarSection" class="tab-section" style="display: none">
+        <h2>Task Calendar</h2>
+        <div id="calendar"></div>
+      </div>
+    </div>
+
+    <!-- Progress Container with Completion Rate Visualization -->
+    <div class="progress-container">
+      <div class="Progress-con">
+        <div class="progress-border">
+          <div class="progress-value-container">
+            <p id="completionRate">0%</p>
+          </div>
+        </div>
+        <!-- Progress Circle SVG -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="160"
+          height="160"
+          viewBox="0 0 160 160"
+        >
+          <defs>
+            <linearGradient id="GradientColor">
+              <stop offset="0%" stop-color="#DA22FF" />
+              <stop offset="100%" stop-color="#9733EE" />
+            </linearGradient>
+          </defs>
+          <circle
+            cx="80"
+            cy="80"
+            r="70"
+            stroke="url(#GradientColor)"
+            stroke-width="20"
+            fill="none"
+            stroke-dasharray="440"
+            stroke-dashoffset="440"
+            transform="rotate(-90 80 80)"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Main Application Script -->
+    <script src="notes.js"></script>
+  </body>
+</html>

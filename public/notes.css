@@ -1,0 +1,426 @@
+/*Course: COSC 225: Web Programming
+Student: Asma Bachir Bey
+Date: 2025/05/20
+file:  my CSS file */
+body {
+  font-family: Arial, sans-serif; /* Default font */
+  background-color: #f4f4f4; /* Light gray background */
+  color: #333; /* Dark text color */
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  text-align: center; /* Center-align text by default */
+}
+
+/* Style for the main container to center content and add subtle shadow */
+.container {
+  max-width: 600px; /* Max width for content container */
+  margin: 50px auto; /* Center container vertically */
+  padding: 20px; /* Add padding inside container */
+  background: white; /* White background for container */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Style for the sidebar container to position it fixed at the top-left */
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99; /* Ensure sidebar is above other content */
+}
+
+/* Style for the toggle button to show/hide sidebar */
+.toggle-btn {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  background: url(plain.png); /* Dark background */
+  border-radius: 0 0 100% 0; /* Semi-circular shape */
+  cursor: pointer; /* Indicate interactivity */
+  transition: all 0.3s ease; /* Smooth transitions */
+  overflow: hidden; /* Hide overflow content */
+}
+
+/*  this is useful for opening the sidebar*/
+.toggle-btn .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background: #eda5cf;
+  border-radius: 100% 0 0 0; /* Match parent border radius */
+  transition: all 0.3s ease; /* this is for a smooth transition */
+}
+
+/* Hover effect for toggle button */
+.toggle-btn:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff9c9c; /* Light blue background */
+  border-radius: 0 0 100% 0; /* Match the button's border radius */
+  z-index: -1; /* Ensure the pseudo-element is behind the button */
+  transition: all 0.3s ease; /* Smooth transition for the hover effect */
+}
+/* Sidebar Styles */
+/* Style for the sidebar to slide in from the left */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px; /* Start off-screen */
+  width: 200px;
+  height: 100vh; /* Full viewport height */
+  background: #333; /* Dark background */
+  color: white; /* White text */
+  transition: left 0.3s ease; /* Smooth slide-in effect */
+  padding-top: 50px; /* Space for toggle button */
+}
+
+/* Hovering effect over the half,half of circle on the top left  shows sidebar */
+.sidebar-container:hover .sidebar {
+  left: 0; /* Show sidebar on hover */
+}
+
+/* Sidebar Navigation Styles */
+/* Remove default list styling for sidebar navigation */
+.sidebar ul {
+  list-style: none; /* to not show like the form of  a  list */
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  background: #4a86e8;
+  color: white;
+}
+
+.sidebar li i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidebar li span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Change background color on hover and active state */
+.sidebar li:hover,
+.sidebar li.active {
+  background: #4a86e8; /* Blue accent on hover/active */
+  color: white; /* White text on hover/active */
+}
+
+/* Space between icon and text in sidebar items */
+.sidebar i {
+  margin-right: 10px;
+}
+
+/* Main Content Styles */
+/* Initial margin for main content */
+.main-content {
+  margin-left: 0;
+  transition: margin-left 0.3s ease; /* transition when sidebar opens */
+}
+
+/* Adjusting main content position by pushing it to the left when sidebar opens */
+.sidebar-container:hover ~ .main-content {
+  margin-left: 250px; /* Collapse main content */
+}
+
+/* Task Input Styles */
+/* Style for the task input section */
+.task-input {
+  margin-bottom: 10px;
+}
+
+/* Style for the task input field */
+#taskInput {
+  flex-grow: 1;
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Task Item Styles */
+/* Style for task items */
+.task-item {
+  width: 90%;
+  display: flex; /*  flexbox for layout */
+  align-items: center; /* Vertically center items */
+  padding: 8px;
+  background: #f5f5f5; /* Light gray background */
+  border-radius: 8px; /* Rounded corners */
+  margin: 8px 0; /* adding vertical spacing  */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for task item checkboxes */
+.task-item input[type="checkbox"] {
+  margin-right: 10px; /* Space between checkbox and text */
+  transform: scale(1.2); /* Making checkbox slightly larger */
+}
+
+/* Style for task text */
+.task-item .task-text {
+  flex-grow: 1; /* Allow text to expand */
+  text-align: left; /* Left-align text */
+  margin-right: 10px;
+}
+
+/* Style for start date */
+.start-date {
+  margin: 0 8px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Style for task start date input */
+#taskStartDate {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button Styles */
+/* Style for buttons */
+button {
+  padding: 10px;
+  background-color: #ff6f61; /* Coral background */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Indicate interactivity */
+  transition: background 0.3s; /* Smooth color transition */
+}
+
+/* Darker red color on button hover */
+button:hover {
+  background-color: #ff2216;
+}
+
+/* Style for theme selector */
+.theme-selector {
+  padding: 15px; /* Add padding around theme selector */
+}
+
+/* Theme Specific Styles */
+
+/* Floral theme styles */
+body.floral {
+  background: url("flower.svg") no-repeat center center fixed; /* Floral background */
+  background-size: cover;
+  color: #ff009d; /* Pink text */
+}
+
+/* Space theme styles */
+body.space {
+  background: url("space.jpg") no-repeat center center fixed; /* Space background */
+  background-size: cover;
+  color: #b300ff; /* Purple text */
+}
+
+/* Pink theme styles */
+body.Pink {
+  background: #ffe6e6; /* Light pink background */
+  color: #ff6f61; /* Coral text */
+}
+
+/* Style for progress circle container */
+.progress-container {
+  position: fixed; /* Stay visible while scrolling */
+  top: 50%; /* Position at middle of viewport */
+  left: 20px; /* Position on left side */
+  transform: translateY(-50%); /* Vertically center */
+  z-index: 9999; /* Ensure above all content so it keeps showing even after sidebar is opened */
+  transition: top 0.3s ease; /* Smoother position transition */
+}
+
+/* Adjust progress container position when sidebar is open */
+.sidebar-container:hover ~ .progress-container {
+  top: calc(50% + 200px); /* Move down when sidebar is open */
+}
+
+/* Reset margin and padding for progress container elements */
+.progress-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style for the progress ring */
+.progress-con {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for outer circle ( the borders) */
+.progress-border {
+  width: 160px;
+  height: 160px;
+  padding: 20px;
+  border-radius: 50%; /* Make circular */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(255, 255, 255, 0.7); /* 3D effect */
+}
+
+/* Style for inner circle */
+.progress-value-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Make circular */
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for completion rate text */
+#completionRate {
+  font-size: 24px;
+  color: #555; /* Dark gray text */
+  font-weight: bold; /* Bold text */
+}
+
+/* SVG Positioning */
+/* Position SVG elements absolutely */
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Tab Section Styles */
+/* Style for tab sections */
+.tab-section {
+  display: none; /* Hide all tabs by default */
+  max-width: 1000px; /* Max width for content container */
+  margin: 50px auto; /* Center container vertically */
+  padding: 20px; /* Add padding inside container */
+  background: white; /* White background for container */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Show active tab */
+.tab-section.active {
+  display: block;
+}
+
+/* Task List Styles */
+/* Style for task lists */
+#currentTaskList,
+#upcomingTaskList,
+#completedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Task Item Styles */
+/* Style for task items */
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin: 4px 0;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for buttons in task items */
+.task-item button {
+  margin-right: 8px;
+  padding: 4px 8px;
+  background-color: #4caf50; /* Green for completed */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Position start date to the extreme right */
+.task-item .start-date {
+  margin-left: auto;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Style for delete button */
+.task-item .delete-btn {
+  margin-left: 8px;
+  padding: 4px 8px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Darker red color on delete button hover */
+.task-item .delete-btn:hover {
+  background-color: #ff0000;
+}
+
+/* Chart Container Styles */
+/* Style for chart containers */
+.chart-container {
+  margin: 20px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Set canvas width and height to 100% */
+canvas {
+  width: 50% !important;
+  height: 50% !important;
+  margin-left: auto; /* to center it*/
+  margin-right: auto;
+}
+
+/* Calendar Styles */
+/* Style for calendar */
+#calendar {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Style for calendar events */
+.fc-event {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Style for calendar event tooltips */
+.fc-event-tooltip {
+  border: 1px solid #ddd;
+  padding: 5px;
+  background: white;
+  border-radius: 4px;
+}
